@@ -1,0 +1,21 @@
+.error {
+    color: red;
+}
+.contact-form {
+    text-align: center;
+}
+.contactH1 {
+    font-size: 40px;
+    margin-top: 20%;
+}
+button {
+    font-size: 20px;
+    margin-top: 2%;
+    border-radius: 5px;
+    background-color: darkred;
+    border: 2px solid black;
+    color: white;
+}
+.placeholder-name {
+    font-size: 18px;
+}
