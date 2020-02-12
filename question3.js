@@ -1,38 +1,38 @@
-const queryString = document.location.search;
-const params = new URLSearchParams(queryString);
+const creatorsUrl = "https://api.rawg.io/api/games/4200";
 
-let id;
-
-if(params.has("id")) {
-    id = params.get("id");
-} else {
-    document.location.href = "question3.html"
-}
-
-
-
-const gamesUrl = "https://api.rawg.io/api/games/4200";
-
-fetch(gamesUrl)
+fetch(creatorsUrl) 
     .then(function(response) {
         return response.json();
     })
     .then(function(json) {
-        createGameDetails(json)
+        console.dir(json);
     })
     .catch(function(error) {
         console.log(error);
     })
 
+function createGameDetails(json) {
+    const results = json.results;
+    console.dir(results);
 
+    const resultsContainer = document.querySelector(".resultsContainer");
 
-function createGameDetails() {
-    console.dir(json);
+    let html = "";
 
-    const image = document.querySelector(".image");
-    image.src = json.background_image;
-    image.alt = json.name;
+    results.forEach(function(result) {
+        let imageUrl = "https://via.placeholder.com/1000";
 
-    const description = document.querySelector(".description");
-    description.innerHTML = json.description;
+        if(result.image) {
+            imageUrl = result.image;
+        }
+
+        html += `<div class="container">
+                    <h1>${result.name}</h1>
+                    <div class="image" style="background-image: url('${background_image}')"></div>
+                    <div class="description">Description goes here</div>
+                </div>`;
+    });
+    resultsContainer.innerHTML = html;
 }
+
+

@@ -1,21 +1,30 @@
-const firstName = document.querySelector("#firstName");
-const error = document.querySelector(".error");
+const form = document.querySelector("#contactForm");
 
-error.style.displey = `none`;
+form.addEventListener("submit", validateForm);
 
-firstName.addEventListener("keyup", checkLength);
+function validateForm(event) {
+    event.preventDefault();
+    console.log("The form was submitted");
 
-function checkLength(event) {
-    const inputValue = event.target.value;
-    const valueLength = inputValue.length;
+    const firstName = document.querySelector("#firstName");
+    const firstNameError = document.querySelector("#firstNameError");
+    const firstNameValue = firstName.value;
 
-    if(valueLength > 2) {
-        error.style.display = `none`;
+    if(checkInputLength(firstNameValue) === true) {
+        firstNameError.style.display = "none";
     } else {
-        error.style.display = `block`;
+        firstNameError.style.display = "block";
     }
-
 }
 
+function checkInputLength(value) {
+    const trimmedValue = value.trim();
+
+    if(trimmedValue.length > 2) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 

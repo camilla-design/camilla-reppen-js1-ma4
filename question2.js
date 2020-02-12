@@ -21,7 +21,7 @@ function createGames(json) {
     results.forEach(function(result) {
         html += `<div class="game">
                 <h2>${result.name}</h2>
-                <img src="http://camilla-reppen.com/reppen/mario.jpg" alt="Name of game" width="200px">
+                <img src="${result.background_image}" alt="${result.name}" width="200px">
             </div>`
     });
 
