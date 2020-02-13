@@ -1,6 +1,6 @@
-const creatorsUrl = "https://api.rawg.io/api/games/4200";
+const gamesUrl = "https://api.rawg.io/api/games/4200";
 
-fetch(creatorsUrl) 
+fetch(gamesUrl) 
     .then(function(response) {
         return response.json();
     })
@@ -9,30 +9,34 @@ fetch(creatorsUrl)
     })
     .catch(function(error) {
         console.log(error);
-    })
-
-function createGameDetails(json) {
-    const results = json.results;
-    console.dir(results);
-
-    const resultsContainer = document.querySelector(".resultsContainer");
-
-    let html = "";
-
-    results.forEach(function(result) {
-        let imageUrl = "https://via.placeholder.com/1000";
-
-        if(result.image) {
-            imageUrl = result.image;
-        }
-
-        html += `<div class="container">
-                    <h1>${result.name}</h1>
-                    <div class="image" style="background-image: url('${background_image}')"></div>
-                    <div class="description">Description goes here</div>
-                </div>`;
     });
-    resultsContainer.innerHTML = html;
+
+function handleResponse(response) {
+    return response.json();
+}
+function createGameDetails(json) {
+    createGameDetails(json);
+}
+function handleError(error) {
+    console.log(error);
 }
 
+fetch(gamesUrl)
+    .then(handleResponse)
+    .then(createGameDetails)
+    .catch(handleError)
 
+
+function createGameDetails(json) {
+    console.dir(json);
+
+    const image = document.querySelector(".image");
+    const newBackgroundImage = json.background_image_additional;
+    image.style = `background-image: url('${newBackgroundImage}')`;
+
+    const name = document.querySelector("h1");
+    name.innerHTML = json.name;
+
+    const description = document.querySelector(".description");
+    description.innerHTML = json.description;
+}
